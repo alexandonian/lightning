@@ -1,0 +1,16 @@
+include *.rst
+include *.txt
+include lightning/utils/data/fish/series/*.json
+include lightning/utils/data/fish/series/*.bin
+include lightning/utils/data/fish/images/*.tif
+include lightning/utils/data/iris/*.json
+include lightning/utils/data/iris/*.bin
+include lightning/utils/data/iris/*.mat
+include lightning/utils/data/iris/*.npy
+include lightning/utils/data/iris/*.txt
+include lightning/utils/data/mouse/images/*.json
+include lightning/utils/data/mouse/images/*.bin
+include lightning/utils/data/mouse/series/*.json
+include lightning/utils/data/mouse/series/*.bin
+include lightning/utils/data/mouse/params/*.json
+include lightning/lib/*.egg

@@ -1,0 +1,10 @@
+*.pyc
+.idea
+.idea_modules
+.DS_Store
+project/project
+project/target
+target*
+dist
+build/*
+.ipynb_checkpoints
