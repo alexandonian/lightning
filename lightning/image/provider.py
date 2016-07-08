@@ -21,6 +21,7 @@ class ImageProvider(object):
     ImageProvider, which loads images and features. Lastly, the ImageProvider
     also generates labels that index and Image object's image array.
 
+
     """
 
     def __init__(self, image_info):
@@ -176,6 +177,11 @@ class ImageSetProvider(object):
     image objects. For each image object, the ImageSetProvider passes one image
     and data file for all image types to an ImageProvider.
 
+    # NOTE: Eventually, the ImageSetProvider will be backed by some sort of database (likely Hadoop),
+    # When we make this switch, the ImageSetProvider will simple make queries to the db, and dispatch an image provider
+    (as opposed to searching nested directories where the position of a file in the directory structure conveys
+    the information about the image).
+
     """
 
     def __init__(self):
@@ -240,6 +246,23 @@ class ImageSetProvider(object):
 
 
 class ImageInfo(object):
+    """ Transaction object that contains info about single image.
+
+    The ImageInfo object is a transaction object that is to be passed
+    between the ImageSet and Image Providers. The ImageSetProvider will
+    query a data base for information about a single image, and pass this
+    information to the ImageProvider using an ImageInfo object. Using
+    ImageInfo, and ImageProvider will load all the appropriate data
+    and generate an Image object.
+
+    Eventually, and it may make sense to combined the ImageInfo and ImageProvider
+     classes, so long as we can load images and other information directly from the
+     data base. Then the ImageSetProvider could become simply a database query builder.
+
+    """
+
+    # TODO: migrate image_info dictionary to Image_info transaction object
+
     def __init__(self):
         pass
 
@@ -260,114 +283,114 @@ class ImageInfo(object):
         return self.file_name
 
 
-class Image_info(object):
-    pass
-    # TODO: migrate image_info dictionary to Image_info transaction object
-
-    # path_to_images = ['resources/images/ER-allTissue/ER_AFRemoved_013.tif',
-    #                   'resources/images/PR-allTissue/PR_AFRemoved_013.tif',
-    #                   'resources/images/HER2-allTissue/Her2_AFRemoved_013.tif']
-    # path_to_features = ['resources/data/013_Quant.csv']
-    # channel_list = ['ER', 'PR', 'HER2']
-    #
-    # image_shape = (2048, 2048)
-    # path = {'images': path_to_images,
-    #         'features': path_to_features}
-    # file_name = {'images': 'image_names',
-    #              'feature': 'feature_name'}
-    # im_type_info = {'path': path,
-    #                 'file_name': file_name,
-    #                 'channel_list': channel_list,
-    #                 'image_shape': image_shape}
-    #
-    # image_info = {Strings.IF: im_type_info}
 
 
-class infoHelper(object):
-    def __init__(self):
-        pass
 
-    @staticmethod
-    def fetch_IF_info(param):
-        if param == "i":
-            print 'test'
+        # path_to_images = ['resources/images/ER-allTissue/ER_AFRemoved_013.tif',
+        #                   'resources/images/PR-allTissue/PR_AFRemoved_013.tif',
+        #                   'resources/images/HER2-allTissue/Her2_AFRemoved_013.tif']
+        # path_to_features = ['resources/data/013_Quant.csv']
+        # channel_list = ['ER', 'PR', 'HER2']
+        #
+        # image_shape = (2048, 2048)
+        # path = {'images': path_to_images,
+        #         'features': path_to_features}
+        # file_name = {'images': 'image_names',
+        #              'feature': 'feature_name'}
+        # im_type_info = {'path': path,
+        #                 'file_name': file_name,
+        #                 'channel_list': channel_list,
+        #                 'image_shape': image_shape}
+        #
+        # image_info = {Strings.IF: im_type_info}
 
-    @staticmethod
-    def fetch_WSI_info(param):
-        pass
-
-    @staticmethod
-    def fetch_IHC_info(param):
-        pass
-
-    @staticmethod
-    def fetch_HaE_info(param):
-        pass
-
-    @staticmethod
-    def fetch_IMS_info(param):
-        pass
-
-    @staticmethod
-    def fetch_ISH_info(param):
-        pass
-
-
-class featureHelper(object):
-    def __init__(self):
-        pass
-
-    @staticmethod
-    def fetch_IF_info(param):
-        if param == "i":
-            print 'test'
-
-    @staticmethod
-    def fetch_WSI_features(param):
-        pass
-
-    @staticmethod
-    def fetch_IHC_features(param):
-        pass
-
-    @staticmethod
-    def fetch_HaE_features(param):
-        pass
-
-    @staticmethod
-    def fetch_IMS_features(param):
-        pass
-
-    @staticmethod
-    def fetch_ISH_features(param):
-        pass
-
-
-class imageHelper(object):
-    def __init__(self):
-        pass
-
-    @staticmethod
-    def fetch_IF_info(param):
-        if param == "i":
-            print 'test'
-
-    @staticmethod
-    def fetch_WSI_image(param):
-        pass
-
-    @staticmethod
-    def fetch_IHC_images(param):
-        pass
-
-    @staticmethod
-    def fetch_HaE_images(param):
-        pass
-
-    @staticmethod
-    def fetch_IMS_images(param):
-        pass
-
-    @staticmethod
-    def fetch_ISH_images(param):
-        pass
+#
+#
+# class infoHelper(object):
+#     def __init__(self):
+#         pass
+#
+#     @staticmethod
+#     def fetch_IF_info(param):
+#         if param == "i":
+#             print 'test'
+#
+#     @staticmethod
+#     def fetch_WSI_info(param):
+#         pass
+#
+#     @staticmethod
+#     def fetch_IHC_info(param):
+#         pass
+#
+#     @staticmethod
+#     def fetch_HaE_info(param):
+#         pass
+#
+#     @staticmethod
+#     def fetch_IMS_info(param):
+#         pass
+#
+#     @staticmethod
+#     def fetch_ISH_info(param):
+#         pass
+#
+#
+# class featureHelper(object):
+#     def __init__(self):
+#         pass
+#
+#     @staticmethod
+#     def fetch_IF_info(param):
+#         if param == "i":
+#             print 'test'
+#
+#     @staticmethod
+#     def fetch_WSI_features(param):
+#         pass
+#
+#     @staticmethod
+#     def fetch_IHC_features(param):
+#         pass
+#
+#     @staticmethod
+#     def fetch_HaE_features(param):
+#         pass
+#
+#     @staticmethod
+#     def fetch_IMS_features(param):
+#         pass
+#
+#     @staticmethod
+#     def fetch_ISH_features(param):
+#         pass
+#
+#
+# class imageHelper(object):
+#     def __init__(self):
+#         pass
+#
+#     @staticmethod
+#     def fetch_IF_info(param):
+#         if param == "i":
+#             print 'test'
+#
+#     @staticmethod
+#     def fetch_WSI_image(param):
+#         pass
+#
+#     @staticmethod
+#     def fetch_IHC_images(param):
+#         pass
+#
+#     @staticmethod
+#     def fetch_HaE_images(param):
+#         pass
+#
+#     @staticmethod
+#     def fetch_IMS_images(param):
+#         pass
+#
+#     @staticmethod
+#     def fetch_ISH_images(param):
+#         pass
