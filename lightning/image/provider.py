@@ -49,11 +49,11 @@ class ImageProvider(object):
         self.class_num = self.determine_class_num(image_info)
         self.feat_data = None
         self.image_obj = None
+        self.channels = None
         self.patches = None
 
     def generate_image_obj(self):
 
-        im_data = {}
         feat_data = {}
 
         self.image_obj = self.load_images_by_type('IF')
@@ -64,7 +64,7 @@ class ImageProvider(object):
 
         self.feat_data = feat_data
 
-        # image_obj = Image(self.image_info, im_data, feat_data)
+        # image_obj = Image(self.image_info, im_data, feat_data) # old image class
 
         # image_obj = Image(im_data[Strings.IF], self.image_info[Strings.IF]['channel_list'])
         # self.image_obj = image_obj
@@ -74,20 +74,29 @@ class ImageProvider(object):
 
     def load_images_by_type(self, im_type):
 
+        im_paths = []
+        channels = []
         if im_type == Types.IF:
-            image_shape = self.image_info[Types.IF]['image_shape']
-            im_paths = self.image_info[Types.IF]['path']['images']
+            # image_shape = self.image_info[Types.IF]['image_shape']
+            # im_paths.append(self.image_info[Types.IF]['path']['images']) This has interesting but unintended behavior
+            im_paths += self.image_info[Types.IF]['path']['images']
             channel_list = self.image_info[Types.IF]['channel_list']
-            return reader.fromtiflist(im_paths, labels=channel_list)
-            # values = np.zeros((len(channel_list), image_shape[0], image_shape[1]))
-            #
-            # # return reader.fromlist(im_paths, self.frompath, labels=channel_list)
-            # for i, path in enumerate(im_paths):
-            #     with Pimage.open(path).convert('L') as im:
-            #         im = np.array(im)
-            #         values[i, :, :] = util.img_as_float(im)
-            #
-            # return values
+            sub_channels = [(Types.IF, sub_channel) for sub_channel in channel_list]
+            channels += sub_channels
+        # Since labels are later converted to an ndarray, (for now) let's
+        # just label images by its numerical position in set
+        labels = range(len(im_paths))
+        self.channels = channels
+        return reader.fromtiflist(im_paths, labels=labels)
+
+        # values = np.zeros((len(channel_list), image_shape[0], image_shape[1]))
+        # # return reader.fromlist(im_paths, self.frompath, labels=channel_list)
+        # for i, path in enumerate(im_paths):
+        #     with Pimage.open(path).convert('L') as im:
+        #         im = np.array(im)
+        #         values[i, :, :] = util.img_as_float(im)
+        #
+        # return values
         return None
 
     def load_features_by_type(self, im_type):
@@ -152,6 +161,8 @@ class ImageProvider(object):
         patches = util.shape.view_as_windows(im, patch_shape, step)
         self.patches = patches
 
+    def get_image_channel(self, channel, sub_channel=None):
+        pass
     @staticmethod
     def determine_image_name(type):
         return None
@@ -281,8 +292,6 @@ class ImageInfo(object):
     @property
     def file_name(self):
         return self.file_name
-
-
 
 
 

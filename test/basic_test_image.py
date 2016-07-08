@@ -25,10 +25,12 @@ im_type_info = {'path': path,
 image_info = {Types.IF: im_type_info}
 
 ip = ImageProvider(image_info)
-
 im = ip.generate_image_obj()
 print(im)
-
+print('Labels: ')
+print(im.labels)
+print('Channels: ')
+print(ip.channels)
 print('Image types: ' + str(ip.feat_data.keys()))
 print ('Features: ')
 print(ip.feat_data['IF'].keys())
