@@ -1,5 +1,5 @@
 from lightning import series, image
-from lightning.image.provider import ImageProvider, ImageSetProvider
+from lightning.image.controller import ImageController, ImageSetProvider
 from lightning.image.readers import fromarray
 from lightning.resources.values import Types
 import numpy as np
@@ -24,7 +24,7 @@ im_type_info = {'path': path,
 
 image_info = {Types.IF: im_type_info}
 
-ip = ImageProvider(image_info)
+ip = ImageController(image_info)
 im = ip.generate_image_obj()
 print(im)
 print('Labels: ')
