@@ -1,4 +1,4 @@
-from lightning.readers import LocalFileReader, LocalParallelReader
+from lightning.readers import LocalFileReader, LocalParallelReader, listsubdir, listsubdirflat
 
 
 def make(tmpdir, files):
@@ -7,6 +7,7 @@ def make(tmpdir, files):
     tmpdir.mkdir('foo/bar')
     for f in files:
         tmpdir.join(f).write('hi')
+
 
 def parse(files):
     return [f.split('/')[-1] for f in files]
@@ -74,3 +75,17 @@ def test_local_recursive_nested(tmpdir):
     make(tmpdir, filenames)
     actual = LocalFileReader().list(str(tmpdir), recursive=True)
     assert parse(actual) == expected
+
+
+def test_local_list_subdir(tmpdir):
+    expected = ['resources/images/ER-allTissue', 'resources/images/ER-allTissue/test',
+                'resources/images/HER2-allTissue', 'resources/images/PR-allTissue']
+    actual = listsubdir('resources/images')
+    assert actual == expected
+
+
+def test_local_list_subdirflat(tmpdir):
+    expected = ['resources/images/ER-allTissue', 'resources/images/HER2-allTissue',
+                'resources/images/PR-allTissue']
+    actual = listsubdirflat('resources/images')
+    assert actual == expected

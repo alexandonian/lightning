@@ -25,6 +25,7 @@
     "<li> Image registration </li>\n",
     "<li> EM patched-base CNN </li>\n",
     "<li> Spatial Statistics </li>\n",
+    "<li> Lightning Live Notebook </li>\n",
     "</ul>"
    ]
   },
@@ -32,6 +33,16 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
+<<<<<<< HEAD
+    "## Specific Objectives:\n",
+    "\n",
+    "<li>Write distributed \"patchify\" - consider using Bolt ChunkedArrays</li>\n",
+    "<li>Move image_info nested dictionaries to ImageInfo transaction object</li>\n",
+    "<li>Clean ImageProvider code</li>\n",
+    "<li>Prepare to convert Provider into a database query helper</li>"
+||||||| merged common ancestors
+    "## Specific Objectives:"
+=======
     "## Specific Objectives:\n",
     "\n",
     "<li>Move image_info nested dictionaries to ImageInfo transaction object</li>\n",
@@ -50,6 +61,7 @@
     "<li>I have found a Medical Image Registration Toolbox which works extrememly well with some of the data I'll be working with. However, this is a MATLAB toolbox. Will this play nicely with the PySpark framework? Will it have to be rewritten? I was planning to work on this on the fall to handle the Registration part of the pipeline </li>\n",
     "<li>Matlab just introduced its own distributed computing/cloud computing options...should I try those instead?</li>\n",
     "<li>What about doing registration on the GPU instead of a cluster?</li>"
+>>>>>>> development
    ]
   },
   {
@@ -173,6 +185,8 @@
     "\n",
     "\n"
    ]
+<<<<<<< HEAD
+||||||| merged common ancestors
   },
   {
    "cell_type": "code",
@@ -182,6 +196,28 @@
    },
    "outputs": [],
    "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": []
+=======
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    ""
+   ]
+>>>>>>> development
   }
  ],
  "metadata": {
@@ -193,7 +229,7 @@
   "language_info": {
    "codemirror_mode": {
     "name": "ipython",
-    "version": 2
+    "version": 2.0
    },
    "file_extension": ".py",
    "mimetype": "text/x-python",
