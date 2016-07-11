@@ -5,7 +5,6 @@ from lightning.resources.values import Types
 import numpy as np
 from lightning_flash import image
 
-
 path_to_images = ['resources/images/ER-allTissue/ER_AFRemoved_013.tif',
                   'resources/images/PR-allTissue/PR_AFRemoved_013.tif',
                   'resources/images/HER2-allTissue/Her2_AFRemoved_013.tif']
@@ -34,6 +33,9 @@ print(ip.channels)
 print('Image types: ' + str(ip.feat_data.keys()))
 print ('Features: ')
 print(ip.feat_data['IF'].keys())
+
+idx = [i for i, ch in enumerate(ip.channels) if ch == ('IF', 'PR')]
+print idx
 # ip.patchify(overlap=200)
 # values = im.images[Strings.IF][:, :, :]
 # values = np.append(values, np.ones((2048, 2048, 1)),axis=2)

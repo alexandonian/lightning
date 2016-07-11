@@ -1,0 +1,4 @@
+{
+  "test/test_readers.py::test_local_list_subdir": true, 
+  "test/test_readers.py::test_local_list_subdirflat": true
+}

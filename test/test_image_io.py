@@ -5,7 +5,7 @@ import json
 from numpy import arange, allclose
 
 from bolt import array as barray
-from lightning.image.readers import fromlist, fromarray, frompng, fromtif, frombinary, fromexample
+from lightning.image.readers import fromlist, fromarray, frompng, fromtif, fromtiflist, frombinary, fromexample
 
 pytestmark = pytest.mark.usefixtures("eng")
 
@@ -152,6 +152,14 @@ def test_from_tif_signed(eng):
     assert data.dtype == 'int16'
     assert allclose(data.toarray().shape, (2, 120, 120))
     assert [x.sum() for x in data.toarray()] == [1973201, 2254767]
+
+
+def test_from_tif_list(eng):
+    tiflist = [os.path.join(resources, 'images/ER-allTissue/ER_AFRemoved_011.tif'),
+               os.path.join(resources, 'images/ER-allTissue/ER_AFRemoved_013.tif')]
+    data = fromtiflist(tiflist)
+    assert data.dtype == 'uint16'
+    assert allclose(data.toarray().shape, (2, 2048, 2048))
 
 
 def test_from_binary(tmpdir, eng):

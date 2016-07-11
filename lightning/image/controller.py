@@ -163,7 +163,9 @@ class ImageController(object):
         self.patches = patches
 
     def get_image_channel(self, channel, sub_channel=None):
-        pass
+        idx = [i for i, ch in enumerate(ip.channels) if ch == ('IF', 'PR')]
+        return self.image_obj[idx[0], :, :]
+
     @staticmethod
     def determine_image_name(type):
         return None

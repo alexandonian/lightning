@@ -1,5 +1,5 @@
 import pytest
-import station
+# import station
 
 
 def pytest_addoption(parser):
