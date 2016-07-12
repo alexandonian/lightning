@@ -372,6 +372,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p><link rel="stylesheet" href="custom.css"></p>
 <div  style="padding: 0px; padding-left: 0px;">
 <img src="lightning_logo.png" width="320px"  style="display: inline-block; margin-left: 0px;">
 </div><p class='header-1'>Welcome to <span style='font-weight:800'>Lightning</span></p><p class='info-text'>Lightning is intended to be an open-source library for integrating and analyzing spatial data obtained from a variety of imaging modalities. Lightning is capable of working with small, medium, and very large data sets. Like its sibling, <span style='font-weight:800'>Thunder</span>, it will expose array operations through either local or distributed implementations with a common interface, and makes it easy to switch between them. Its distributed implementation currently targets Spark, a powerful cluster computing framework. 
@@ -431,7 +432,7 @@ div#notebook {
 
 <p class='info-text'>In contrast, most imaging modalities natively deliver their measurements as an $n$th order tensor (multidimensional array of values that can be accessed via $n$ indices). More specifically, an imaging modality that records along $n_s$ spatial dimensions and acquires an $n_m$  dimensional array at each measurement location delivers an $n = n_s + n_m$ order tensor. To ground this discussion, typical examples include:</p>
 <ul class='info-bullet'>
-<li>$n_s = 0$: a single measurement</li>
+<li>\\(n_s = 0\\): a single measurement</li>
 <li>$n_s = 1$: a list of measurements</li>
 <li>$n_s = 2$: 2D imaging (e.g. light microscopy)</li>
 <li>$n_s = 3$: 3D imaging (e.g. MRI)</li>
@@ -450,7 +451,9 @@ div#notebook {
 </div><p class='info-text' style='margin-bottom:50px'><b>Figure 1</b>. Example of the flattening procedure. An RGB image with 2 spatial dimensions and one measurement dimension with three channels (red, green and blue) is converted to a 2D array. The rows represent individual pixels and the colums correspond red, green and blue measurements at that pixel.
 </p><p class='info-text'> <span style='font-weight:800'>Advantage:</span> In this way, an image can be viewed more as a detailed description of the “state” of a tissue that makes a point to use the strong suits of each imaging modality. For example, we can enhance the spatial specificity of mass-spec imaging, which has high chemical specificity, but fusing with H&E images. We can start to incorporate genetic information such as maps of gene expression into our description of the state of the tissue. </p><p class='header-3'> Handling the Image Registration Problem (Lightning-Register)</p>
 <p class='info-text'>
+We are interested in "image-fusion" approaches to combining data across modalities, including integrating with genomics data in the long run. However, image registration is a pre-requisite for any modern approach to image fusion [1]. Thus, we will eventually need a solution to the image registration problem.
 
+To the best of my knowledge, the only cases where you could fuse without registering are instances where the same section of tissue has been imaged multiple times for different features (these are aligned by definition). If the features of interest require a different labeling/staining technique, it would be possible to differentially label neighboring sections - but now registration is needed again. Even this approach seems inefficient and complicated to do at a large scale. Having image-registration would also allow for inter-subject comparisons. 
 </p><p class='header-3'> Handling the Multi-resolution Problem (Lightning-Fuse)</p>
 <p class='info-text'>Now that the images are aligned, the spatial domian is common to all data sources. Even still, it may be difficult to establish a one-to-one mapping between measurements of different technical origin due to the different spatial resolution scales. The naive approach would be to downsample images to the match the modality with the lowest spatial approach. A better approach would be to apply a <b>one-to-many mapping</b> whereby many observations in a higher resolution modality is mapped to a single observation in a lower resolution modality (for more info see Raf Van De Plas 2015) </p><p><img src='Multi-Resolution.png' width='200px'style="display: margin-left: 0px; align:middle;"></p>
 
@@ -491,7 +494,9 @@ div#notebook {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p class='header-3'> Provider</p>
+<p class='info-text'>Explain at lab meeting</p>
 <p class='header-3'> ImageController</p>
+<p class='info-text'>Explain at lab meeting</p>
 </div>
 </div>
 </div>
@@ -501,6 +506,18 @@ div#notebook {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p class='header-2'>References</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol>
+<li>Van de Plas, Raf, et al. "Image fusion of mass spectrometry and microscopy: a multimodality paradigm for molecular tissue mapping." Nature methods12.4 (2015): 366-372.</li>
+</ol>
+
 </div>
 </div>
 </div>
