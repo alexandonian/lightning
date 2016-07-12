@@ -2,13 +2,18 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def show(image):
+def show_first_three_channels(image):
     if image.value_shape[0] > 3:
         im = image.toarray()[0:3, :, :]
         im = np.swapaxes(im, 0, 2)
         plt.imshow(im)
     else:
         plt.imshow(np.swapaxes(image.toarray(), 0, 2))
+    plt.show()
+
+
+def show_channel(channel):
+    plt.imshow(channel)
     plt.show()
 
 
@@ -19,5 +24,8 @@ def show_subset_patches(patches, subplot_shape):
             plt.subplot(subplot_shape[0], subplot_shape[1], k)
             patch = patches[i, j, 0, :, :, :]
             plt.imshow(patch)
+            cur_axes = plt.gca()
+            cur_axes.axes.get_xaxis().set_visible(False)
+            cur_axes.axes.get_yaxis().set_visible(False)
             k += 1
     plt.show()

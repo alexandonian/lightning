@@ -57,6 +57,7 @@ class ImageController(object):
 
         feat_data = {}
 
+        # This needs to be fixed: works only because we have one type.
         self.image_obj = self.load_images_by_type('IF')
         for im_type in self.image_info.keys():
             #     self.image_obj = self.load_images_by_type(type)
@@ -163,7 +164,7 @@ class ImageController(object):
         self.patches = patches
 
     def get_image_channel(self, channel, sub_channel=None):
-        idx = [i for i, ch in enumerate(ip.channels) if ch == ('IF', 'PR')]
+        idx = [i for i, ch in enumerate(self.channels) if ch == ('IF', 'PR')]
         return self.image_obj[idx[0], :, :]
 
     @staticmethod
