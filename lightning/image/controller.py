@@ -116,7 +116,7 @@ class ImageController(object):
             feats = {'xy': None,
                      'intensity': None}
 
-            feat_path = self.image_info[Types.IF]['path']['features'][0]
+            feat_path = self.image_info[Types.IF]['path']['features']
             df = pd.read_csv(feat_path)
 
             # Load spatial xy coordinates
@@ -182,10 +182,10 @@ class ImageController(object):
         ###########################################################################
 
 
-class ImageSetProvider(object):
-    """Generate and dispatch ImageProvider objects.
+class Provider(object):
+    """Generate and dispatch ImageController objects.
 
-    The ImageSet (and ImageProvider) class bridge the gap between
+    The Provider (and ImageController) class bridge the gap between
     ImageSet and Image objects. The ImageSetProvider determines the image
     modalities of interest, finds all image and data files for each image type
     and passes this information to individual ImageProviders, which generate
@@ -199,7 +199,7 @@ class ImageSetProvider(object):
 
     """
 
-    def __init__(self):
+    def __init__(self, Project_info):
         """
         TODO: a list of imaging modalities OR a a dictionary containing
         imaging modalities mapped to their paths something like that
@@ -218,6 +218,9 @@ class ImageSetProvider(object):
             self.num_types = None
         self.num_images = None
         self.image_info_list = None
+
+    def generate_ImControllers(self):
+        pass
 
     def has_subchannels(self):
         pass

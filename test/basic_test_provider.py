@@ -1,4 +1,4 @@
-from lightning.image.controller import ImageController, ImageSetProvider
+from lightning.image.controller import ImageController, Provider
 from lightning.image.image import Image
 import lightning.image.readers as reader
 from numpy import asarray
