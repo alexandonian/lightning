@@ -17,12 +17,15 @@ def show_channel(channel):
     plt.show()
 
 
-def show_subset_patches(patches, subplot_shape):
+def show_subset_patches(patches, subplot_shape, channel_num=None):
     k = 1
     for i in range(subplot_shape[0]):
         for j in range(subplot_shape[1]):
             plt.subplot(subplot_shape[0], subplot_shape[1], k)
-            patch = patches[i, j, 0, :, :, :]
+            if channel_num is not None:
+                patch = patches[i, j, 0, :, :, channel_num]
+            else:
+                patch = patches[i, j, 0, :, :, :]
             plt.imshow(patch)
             cur_axes = plt.gca()
             cur_axes.axes.get_xaxis().set_visible(False)

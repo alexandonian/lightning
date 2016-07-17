@@ -156,7 +156,7 @@ class ImageController(object):
         # # if patch_shape != im.shape: This doesn't make any sense!!!!
         # if path_shape
         #     patch_shape = (256, 256, im.shape[2])
-
+        # TODO: Input validation/Error checking
         step = tuple((patch_shape[0] - overlap, patch_shape[1] - overlap, 1))
         im = self.image_obj.toarray()[0:3, :, :]
         im = np.swapaxes(im, 0, 2)
@@ -164,7 +164,7 @@ class ImageController(object):
         self.patches = patches
 
     def get_image_channel(self, channel, sub_channel=None):
-        idx = [i for i, ch in enumerate(self.channels) if ch == ('IF', 'PR')]
+        idx = [i for i, ch in enumerate(self.channels) if ch == channel]
         return self.image_obj[idx[0], :, :]
 
     @staticmethod
