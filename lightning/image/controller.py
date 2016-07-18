@@ -148,7 +148,7 @@ class ImageController(object):
             return feats
         return None
 
-    def patchify(self, patch_shape=(256, 256, 3), overlap=0):
+    def patchify(self, patch_shape=(3, 256, 266), overlap=0):
         #    if channel:
         #     im = self.images[channel]
         # else:
@@ -157,9 +157,8 @@ class ImageController(object):
         # if path_shape
         #     patch_shape = (256, 256, im.shape[2])
         # TODO: Input validation/Error checking
-        step = tuple((patch_shape[0] - overlap, patch_shape[1] - overlap, 1))
+        step = tuple((1, patch_shape[1] - overlap, patch_shape[2] - overlap))
         im = self.image_obj.toarray()[0:3, :, :]
-        im = np.swapaxes(im, 0, 2)
         patches = util.shape.view_as_windows(im, patch_shape, step)
         self.patches = patches
 
