@@ -116,7 +116,7 @@ class ImageController(object):
             feats = {'xy': None,
                      'intensity': None}
 
-            feat_path = self.image_info[Types.IF]['path']['features']
+            feat_path = self.image_info[Types.IF]['path']['features'][0]
             df = pd.read_csv(feat_path)
 
             # Load spatial xy coordinates
